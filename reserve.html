@@ -92,7 +92,9 @@
 
   $(".submit").on("click", function(event) {
     event.preventDefault();
-
+    // data = 1;
+    // data++;
+    
     // Here we grab the form elements
     var newReservation = {
       customerName: $("#reserve-name").val().trim(),
@@ -108,17 +110,13 @@
     // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
     // depending on if a tables is available or not.
 
-    $.post("/api/tables", newReservation,
+    $.post("/api/reserved", newReservation,
       function(data) {
 
         // If a table is available... tell user they are booked.
+        // If a table is not available... tell user they on the waiting list.
         if (data) {
-          alert("Yay! You are officially booked!");
-        }
-
-        // If a table is available... tell user they on the waiting list.
-        else {
-          alert("Sorry you are on the wait list");
+          alert(data);
         }
 
         // Clear the form when submitting
